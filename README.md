@@ -4,33 +4,37 @@
 
 As infrastructure I used an official Docker Composer for Laravel 7  https://hub.docker.com/r/bitnami/laravel
 Which contains two containers one for laravel 7 and one for mysql. I added an other container for phpmyadmin exposed via port 8081 (http://localhost:8081)
+
 2.	Install Docker and Docker compose:
-https://docs.docker.com/engine/install/
-https://docs.docker.com/compose/install/
+      https://docs.docker.com/engine/install/
+      https://docs.docker.com/compose/install/
+   
 3.	Then clone the source code from git https://github.com/YCHOUGRANI/ProCook-challenge
+
 4.	Run Docker-composer up -d
+
 5.	docker-compose exec myapp php artisan migrate:refresh --seed
+
 6.	Browse the link http://localhost:8000/
 
 7. I scafold the controller, model, migration, factory and seeder for the both model Category and Product as following:
-php artisan make:model Model/Category -a
-php artisan make:model Model/Product -a
+     php artisan make:model Model/Category -a
+     php artisan make:model Model/Product -a
 
 8. The entry point for the Api in "/routes/api.php" is to start with a list of cotegories, then for each 
    category we can fetch a list of product for that specific category.
    
-Route::apiResource('/categories', 'CategoryController');
-Route::group(
-    ['prefix' => 'categories'],
-    function () {
-        Route::apiResource('/{category}/products', 'ProductController');
-    }
-
-);
+    Route::apiResource('/categories', 'CategoryController');
+    Route::group(
+        ['prefix' => 'categories'],
+          function () {
+             Route::apiResource('/{category}/products', 'ProductController');
+          }
+    );
    
    See the postman doc:  https://documenter.getpostman.com/view/15131373/TzCL7njW
    
-   
+  9. Api Example:
     
    Get one specific product (by default in English lang) :
    Get http://localhost:8000/api/categories/1/products/4
