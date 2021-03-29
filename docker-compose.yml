@@ -20,7 +20,7 @@ services:
 
   myapp:
     tty: true
-    image: laravel-memory-limit
+    image: docker.io/bitnami/laravel:7-debian-10
     container_name: laravel
     environment:
       - DB_HOST=mariadb
